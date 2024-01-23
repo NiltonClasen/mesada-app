@@ -1,13 +1,26 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
 
 export default function Movements({ data }) {
+  const [showValue, setShowValue] = useState(false);
+
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => setShowValue(!showValue)}>
       <Text style={styles.date}>{data.date}</Text>
 
       <View style={styles.content}>
         <Text style={styles.label}>{data.label}</Text>
-        <Text style={data.type === 0 ? styles.value : styles.gastos}>R${data.value}</Text>
+
+        {showValue ? (
+          <Text style={data.type === 0 ? styles.value : styles.gastos}>
+            {data.type == 0 ? `R$ ${data.value}` : `R$ -${data.value}`}
+          </Text>
+        ) : (
+          <View style={styles.skeleton}>
+
+          </View>
+        )}
+
       </View>
     </TouchableOpacity>
   );
@@ -34,14 +47,21 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
   },
-  value:{
+  value: {
     fontWeight: "bold",
     fontSize: 16,
-    color:'#2ecc71'
+    color: "#2ecc71",
   },
-  gastos:{
+  gastos: {
     fontWeight: "bold",
     fontSize: 16,
-    color:'#e74c3c'
-  }
+    color: "#e74c3c",
+  },
+  skeleton: {
+    marginTop: 6,
+    width: 80,
+    height: 10,
+    backgroundColor: "#DADADA",
+    borderRadius: 8,
+  },
 });
