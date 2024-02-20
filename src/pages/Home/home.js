@@ -3,6 +3,7 @@ import Header from "../../components/Header/header";
 import Balance from "../../components/Balance/balance";
 import Movements from "../../components/Movements/movements";
 import Actions from "../../components/Actions/actions";
+import { useNavigation } from '@react-navigation/native';
 
 const list = [
   {
@@ -28,13 +29,19 @@ const list = [
   },
 ];
 
-export default function Home() {
+const Home = () => {
+
+  const navigation = useNavigation();
+
+  const onPress = () => {
+    navigation.navigate('OutraPagina');
+  };
+
   return (
     <View style={styles.container}>
       <Header name="Nilton E. Clasen"></Header>
-
       <Balance saldo="1000,00" gastos="390,00"></Balance>
-      <Actions></Actions>
+      <Actions />
       <Text style={styles.title}>Últimas movimentações</Text>
       <FlatList
         style={styles.list}
@@ -61,5 +68,7 @@ const styles = StyleSheet.create({
     marginLeft: 14,
     marginRight: 14,
     marginTop: 14,
-  }
+  },
 });
+
+export default Home;

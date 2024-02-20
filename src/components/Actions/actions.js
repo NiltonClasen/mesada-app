@@ -1,3 +1,4 @@
+import React from "react";
 import {
   View,
   StyleSheet,
@@ -5,31 +6,58 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import {
+  AntDesign,
+  MaterialIcons,
+  FontAwesome,
+  FontAwesome5,
+} from "@expo/vector-icons";
 
-import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from '@react-navigation/native';
 
-export default function Actions() {
+const Actions = () => {
+  const navigation = useNavigation();
+
+  const onPress = () => {
+    navigation.navigate("OutraPagina");
+  };
+
   return (
     <ScrollView
       style={styles.container}
       horizontal={true}
       showsHorizontalScrollIndicator={false}
     >
-      <TouchableOpacity style={styles.actionButton}>
+      <TouchableOpacity
+        style={styles.actionButton}
+        onPress={() => onPress()}
+      >
         <View style={styles.areaButton}>
-          <AntDesign name="addfolder" size={26} color="#000" />
+          <FontAwesome name="money" size={26} color="black" />
         </View>
         <Text style={styles.labelButton}>Entradas</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.actionButton}>
         <View style={styles.areaButton}>
-          <AntDesign name="tagso" size={26} color="#000" />
+          <MaterialIcons name="mood-bad" size={26} color="#000" />
         </View>
-        <Text style={styles.labelButton}>Compras</Text>
+        <Text style={styles.labelButton}>Saídas</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.actionButton}>
+        <View style={styles.areaButton}>
+          <AntDesign name="book" size={26} color="black" />
+        </View>
+        <Text style={styles.labelButton}>Extrato</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.actionButton}>
+        <View style={styles.areaButton}>
+          <FontAwesome5 name="people-arrows" size={26} color="black" />
+        </View>
+        <Text style={styles.labelButton}>Parceiro</Text>
       </TouchableOpacity>
     </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -54,6 +82,8 @@ const styles = StyleSheet.create({
   labelButton: {
     marginTop: 4,
     textAlign: "center",
-    fontWeight:"bold"
+    fontWeight: "bold",
   },
 });
+
+export default Actions;
